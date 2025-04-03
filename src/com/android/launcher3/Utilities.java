@@ -96,6 +96,8 @@ import com.android.launcher3.views.ActivityContext;
 import com.android.launcher3.views.BaseDragLayer;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 
+import com.android.internal.util.superior.SuperiorUtils;
+
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
@@ -151,6 +153,11 @@ public final class Utilities {
 
     @IntDef({TRANSLATE_UP, TRANSLATE_DOWN, TRANSLATE_LEFT, TRANSLATE_RIGHT})
     public @interface AdjustmentDirection{}
+    
+    public static final String GSA_PACKAGE = "com.google.android.googlequicksearchbox";
+    public static final String LENS_ACTIVITY = "com.google.android.apps.search.lens.LensExportedActivity";
+    public static final String LENS_URI = "google://lens";
+    public static final String PIXEL_SEARCH_PACKAGE = "rk.android.app.pixelsearch";
 
     /**
      * Returns true if theme is dark.
@@ -978,5 +985,25 @@ public final class Utilities {
 
     public static boolean isWorkspaceEditAllowed(Context context) {
         return !LauncherPrefs.WORKSPACE_LOCK.get(context);
+    }
+
+    public static boolean hotseatEnabled(Context context) {
+        if (isTablet(context)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isTablet(Context context) {
+        int smallestWidthDp = context.getResources().getConfiguration().smallestScreenWidthDp;
+        return smallestWidthDp >= 600;
+    }
+
+    public static boolean isGsaInstalled(Context context) {
+        return SuperiorUtils.isPackageInstalled(context, GSA_PACKAGE);
+    }
+
+    public static boolean isPixelSearchInstalled(Context context) {
+        return SuperiorUtils.isPackageInstalled(context, PIXEL_SEARCH_PACKAGE);
     }
 }

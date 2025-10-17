@@ -1317,6 +1317,8 @@ public class Launcher extends StatefulActivity<LauncherState>
 
         DragView.removeAllViews(this);
         TraceHelper.INSTANCE.endSection();
+        
+        LauncherStatesHelper.setActivityResumed(true);
     }
 
     @Override
@@ -1333,6 +1335,8 @@ public class Launcher extends StatefulActivity<LauncherState>
             mOverlayManager.onActivityPaused();
         }
         mAppWidgetHolder.setActivityResumed(false);
+        
+        LauncherStatesHelper.setActivityResumed(false);
     }
 
     /**

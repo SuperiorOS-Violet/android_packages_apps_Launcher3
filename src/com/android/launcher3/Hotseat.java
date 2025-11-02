@@ -318,7 +318,6 @@ public class Hotseat extends CellLayout implements Insettable {
 
         if (LauncherStatesHelper.shouldHideHomeElements()) {
             setVisibility(View.GONE);
-            setAlpha(0f);
         }
     }
 
